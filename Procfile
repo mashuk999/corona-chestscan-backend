@@ -1,1 +1,1 @@
-web: python manage.py migrate && gunicorn bartara.wsgi --log-file -
+web: python manage.py migrate && gunicorn coronascan.wsgi --log-file -
