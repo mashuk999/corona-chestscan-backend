@@ -26,7 +26,7 @@ SECRET_KEY = '&5xlw0)4f^#vq=p4y1!n75gt48!dbnh222oi&tp86j1y996)s*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['corona-chest-scan.herokuapp.com']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'chestscan',
 ]
 
 MIDDLEWARE = [
@@ -119,6 +120,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT =os.path.join(BASE_DIR,'All Assets')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'chestscan/templates')
+]
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
