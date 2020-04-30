@@ -7,6 +7,7 @@
 </head>
 <body>
     <form action="/" method="POST">
+        {%csrf_token%}
         <input type="text" name="imageurl" />
         <input type="submit" />
     </form>
