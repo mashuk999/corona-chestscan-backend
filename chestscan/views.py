@@ -12,5 +12,5 @@ def homepage(request):
     learn = load_learner(path, 'exported.pkl')
     urllib.request.urlretrieve("https://www.healthimaging.com/sites/default/files/styles/media_image_mobile/public/assets/articles/4996132.jpg", './image.jpg')
     img = open_image('./image.jpg')
-    pred_class,pred_idx,outputs = learner.predict(img)
+    pred_class,pred_idx,outputs = learn.predict(img)
     return render(request,'index.html',{'datapredicted':pred_class})
