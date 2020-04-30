@@ -10,7 +10,7 @@ def homepage(request):
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     path = os.path.join(BASE_DIR,'model/')
     learn = load_learner(path, 'exported.pkl')
-    urllib.request.urlretrieve("https://www.healthimaging.com/sites/default/files/styles/media_image_mobile/public/assets/articles/4996132.jpg", './image.jpg')
+    urllib.request.urlretrieve(r"https://upload.wikimedia.org/wikipedia/commons/a/a1/Normal_posteroanterior_%28PA%29_chest_radiograph_%28X-ray%29.jpg", './image.jpg')
     img = open_image('./image.jpg')
     pred_class,pred_idx,outputs = learn.predict(img)
     return render(request,'index.html',{'datapredicted':pred_class,'predidx':pred_idx,'outputs':outputs})
