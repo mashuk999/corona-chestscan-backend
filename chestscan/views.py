@@ -4,6 +4,7 @@ from fastai.utils.mem import *
 from fastai.callbacks.hooks import *
 import os
 import urllib.request
+from django.http import JsonResponse
 
 # Create your views here.
 def homepage(request):
@@ -18,3 +19,18 @@ def homepage(request):
         return render(request,'index.html',{'datapredicted':pred_class,'predidx':pred_idx,'outputs':outputs})
     else:
         return render(request,'form.html')
+
+def getClientResponse(request):
+    if request.method == 'POST':
+        imageurl = request.POST['imageurl']
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        path = os.path.join(BASE_DIR,'model/')
+        learn = load_learner(path, 'exported.pkl')
+        # urllib.request.urlretrieve(imageurl, './image.jpg')
+        img = open_image(request.POST.get('image'))
+        pred_class,pred_idx,outputs = learn.predict(img)
+        data = [{'category': pred_class, 'tensors': outputs}]
+        return JsonResponse(data, safe=False)
+    else:
+        data = [{'category': 'no found', 'tensors': 'invalid'}]
+        return JsonResponse(data, safe=False)
