@@ -42,7 +42,7 @@ def getClientResponse(request):
         #img = open_image(file_url)
         pred_class,pred_idx,outputs = learn.predict(img)
         print(pred_class)
-        data = [{'category': pred_class, 'tensors': 'invalid'}]
+        data = [{'category': str(pred_class), 'tensors': 'invalid'}]
         return JsonResponse(data, safe=False)
         # dataRes = models.ResponseModel(category="normal",confidence='100')
         # ser = serializer.ResponseSerializer(dataRes)
