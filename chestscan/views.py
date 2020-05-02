@@ -37,6 +37,7 @@ def getClientResponse(request):
         # img = open_image(request.POST.get('image'))
         # pred_class,pred_idx,outputs = learn.predict(img)
         #data = [{'category': pred_class, 'tensors': outputs}]
+        print(request.data)
         imgObj = serializer.RequestSerializer(data=request.data)
         if imgObj.is_valid():
             img = imgObj.image
