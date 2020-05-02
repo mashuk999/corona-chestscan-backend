@@ -40,7 +40,8 @@ def getClientResponse(request):
         print(request.data)
         imgObj = serializer.RequestSerializer(data=request.data)
         #if imgObj.is_valid():
-        img = request.data['photo']
+        img = request.data['photo'].read()
+        img = img.open(io.BytesIO(image))
     #img = open_image(request.POST.get('image'))
         pred_class,pred_idx,outputs = learn.predict(img)
         dataRes = models.ResponseModel(category=pred_class,confidence='100')
