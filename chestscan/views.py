@@ -37,12 +37,16 @@ def getClientResponse(request):
 
         uploadedFile = request.FILES["photo"]
         file_name = default_storage.save(uploadedFile.name, uploadedFile)
+        file_url = default_storage.url(file_name)
         img = open_image(uploadedFile.name)
+        #img = open_image(file_url)
         pred_class,pred_idx,outputs = learn.predict(img)
         print(pred_class)
-        dataRes = models.ResponseModel(category="norma;",confidence='100')
-        ser = serializer.ResponseSerializer(dataRes)
-        return Response(ser.data)
+        data = [{'category': pred_class, 'tensors': 'invalid'}]
+        return JsonResponse(data, safe=False)
+        # dataRes = models.ResponseModel(category="normal",confidence='100')
+        # ser = serializer.ResponseSerializer(dataRes)
+        # return Response(ser.data)
     else:
         data = [{'category': 'no found', 'tensors': 'invalid'}]
         return JsonResponse(data, safe=False)
