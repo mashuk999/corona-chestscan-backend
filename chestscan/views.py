@@ -39,7 +39,7 @@ def getClientResponse(request):
         print(request.FILES)
         imgObj = serializer.RequestSerializer(data=request.data)
         if imgObj.is_valid():
-            img = imgObj.image
+            img = imgObj.photo
         #img = request.FILES["photo"].read()
         #img = img.open(io.BytesIO(image))
         #img = open_image(request.POST.get('image'))
