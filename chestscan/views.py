@@ -11,6 +11,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import io
 from . import models,serializer
+from django.core.files import File
 
 # Create your views here.
 def homepage(request):
