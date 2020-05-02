@@ -49,6 +49,7 @@ def getClientResponse(request):
             ser = serializer.ResponseSerializer(dataRes)
             return Response(ser.data)
         else:
+            print("Wrong Data")
             dataRes = models.ResponseModel(category="wrong data",confidence='100')
             ser = serializer.ResponseSerializer(dataRes)
             return Response(ser.data)

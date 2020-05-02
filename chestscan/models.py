@@ -6,4 +6,4 @@ class ResponseModel(models.Model):
     confidence = models.CharField(max_length=100)
 
 class RequestData(models.Model):
-    image = models.ImageField(upload_to='post_images')
+    photo = models.ImageField(upload_to='post_images')
