@@ -22,14 +22,15 @@ def homepage(request):
 
 def getClientResponse(request):
     if request.method == 'POST':
-        imageurl = request.POST['imageurl']
-        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        path = os.path.join(BASE_DIR,'model/')
-        learn = load_learner(path, 'exported.pkl')
-        # urllib.request.urlretrieve(imageurl, './image.jpg')
-        img = open_image(request.POST.get('image'))
-        pred_class,pred_idx,outputs = learn.predict(img)
-        data = [{'category': pred_class, 'tensors': outputs}]
+        # imageurl = request.POST['imageurl']
+        # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        # path = os.path.join(BASE_DIR,'model/')
+        # learn = load_learner(path, 'exported.pkl')
+        # # urllib.request.urlretrieve(imageurl, './image.jpg')
+        # img = open_image(request.POST.get('image'))
+        # pred_class,pred_idx,outputs = learn.predict(img)
+        #data = [{'category': pred_class, 'tensors': outputs}]
+        data = [{'category': 'got post', 'tensors': 'invalid'}]
         return JsonResponse(data, safe=False)
     else:
         data = [{'category': 'no found', 'tensors': 'invalid'}]
