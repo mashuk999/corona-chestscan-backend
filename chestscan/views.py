@@ -11,8 +11,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import io
 from . import models,serializer
-from django.core.files import File
-
+from django.core.files.storage import default_storage
 # Create your views here.
 def homepage(request):
     if request.method == 'POST':
@@ -37,9 +36,8 @@ def getClientResponse(request):
         print(request.FILES)
 
         uploadedFile = request.FILES["photo"]
-        model_file = File(uploadedFile)
-        model_file.save(('./'+uploadedFile.name), f.readlines(), true)
-        img = open_image('./'+uploadedFile.name)
+        file_name = default_storage.save(uploadedFile.name, uploadedFile)
+        img = open_image(uploadedFile.name)
         pred_class,pred_idx,outputs = learn.predict(img)
         print(pred_class)
         dataRes = models.ResponseModel(category="norma;",confidence='100')
