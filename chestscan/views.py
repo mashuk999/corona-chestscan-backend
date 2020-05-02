@@ -42,11 +42,11 @@ def getClientResponse(request):
             img = imgObj.image
         #img = open_image(request.POST.get('image'))
             pred_class,pred_idx,outputs = learn.predict(img)
-            dataRes = models.ResponseModel(category=str(pred_class),confidence='100')
+            dataRes = models.ResponseModel(category=pred_class,confidence='100')
             ser = serializer.ResponseSerializer(dataRes)
             return Response(ser.data)
         else:
-            data = [{'category': 'no found', 'tensors': 'invalid'}]
+            data = [{'category': 'data is wrong', 'tensors': 'invalid'}]
             return JsonResponse(data, safe=False)
     else:
         data = [{'category': 'no found', 'tensors': 'invalid'}]
