@@ -4,3 +4,6 @@ from django.db import models
 class ResponseModel(models.Model):
     category = models.CharField(max_length=100)
     confidence = models.CharField(max_length=100)
+
+class RequestData(models.Model):
+    image = models.ImageField(upload_to='post_images')

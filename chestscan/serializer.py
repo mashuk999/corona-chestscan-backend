@@ -6,3 +6,8 @@ class ResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ResponseModel
         fields = '__all__'
+
+class RequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.RequestData
+        fields = '__all__'
