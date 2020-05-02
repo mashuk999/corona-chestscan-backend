@@ -5,6 +5,7 @@ from fastai.callbacks.hooks import *
 import os
 import urllib.request
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def homepage(request):
@@ -20,6 +21,7 @@ def homepage(request):
     else:
         return render(request,'form.html')
 
+@csrf_exempt
 def getClientResponse(request):
     if request.method == 'POST':
         # imageurl = request.POST['imageurl']
