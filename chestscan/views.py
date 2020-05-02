@@ -44,7 +44,8 @@ def getClientResponse(request):
         #img = img.open(io.BytesIO(image))
         #img = open_image(request.POST.get('image'))
             pred_class,pred_idx,outputs = learn.predict(img)
-            dataRes = models.ResponseModel(category=pred_class,confidence='100')
+            print(pred_class)
+            dataRes = models.ResponseModel(category="norma;",confidence='100')
             ser = serializer.ResponseSerializer(dataRes)
             return Response(ser.data)
         else:
