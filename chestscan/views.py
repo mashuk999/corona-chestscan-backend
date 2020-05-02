@@ -49,8 +49,9 @@ def getClientResponse(request):
             ser = serializer.ResponseSerializer(dataRes)
             return Response(ser.data)
         else:
-            data = [{'category': 'data is wrong', 'tensors': 'invalid'}]
-            return JsonResponse(data, safe=False)
+            dataRes = models.ResponseModel(category="wrong data",confidence='100')
+            ser = serializer.ResponseSerializer(dataRes)
+            return Response(ser.data)
     else:
         data = [{'category': 'no found', 'tensors': 'invalid'}]
         return JsonResponse(data, safe=False)
