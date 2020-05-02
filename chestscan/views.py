@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
+import io
 from . import models,serializer
 
 # Create your views here.
@@ -40,9 +40,10 @@ def getClientResponse(request):
         print(request.data)
         imgObj = serializer.RequestSerializer(data=request.data)
         #if imgObj.is_valid():
-        img = request.FILES['photo'].read()
+        
+        img = request.FILES["photo"].read()
         img = img.open(io.BytesIO(image))
-    #img = open_image(request.POST.get('image'))
+        #img = open_image(request.POST.get('image'))
         pred_class,pred_idx,outputs = learn.predict(img)
         dataRes = models.ResponseModel(category=pred_class,confidence='100')
         ser = serializer.ResponseSerializer(dataRes)
