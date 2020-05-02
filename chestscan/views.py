@@ -6,6 +6,11 @@ import os
 import urllib.request
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from snippets.models import Snippet
+from snippets.serializers import SnippetSerializer
 
 # Create your views here.
 def homepage(request):
@@ -21,7 +26,7 @@ def homepage(request):
     else:
         return render(request,'form.html')
 
-@csrf_exempt
+@api_view(['GET', 'POST'])
 def getClientResponse(request):
     if request.method == 'POST':
         # imageurl = request.POST['imageurl']
@@ -33,7 +38,7 @@ def getClientResponse(request):
         # pred_class,pred_idx,outputs = learn.predict(img)
         #data = [{'category': pred_class, 'tensors': outputs}]
         data = [{'category': 'got post', 'tensors': 'invalid'}]
-        return JsonResponse(data, safe=False)
+        return Response(status=status.HTTP_204_NO_CONTENT)
     else:
         data = [{'category': 'no found', 'tensors': 'invalid'}]
         return JsonResponse(data, safe=False)
