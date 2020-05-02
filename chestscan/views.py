@@ -36,7 +36,7 @@ def getClientResponse(request):
         # pred_class,pred_idx,outputs = learn.predict(img)
         #data = [{'category': pred_class, 'tensors': outputs}]
         data = [{'category': 'got post', 'tensors': 'invalid'}]
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response([OrderedDict([('id', 1), ('title', ''), ('code', 'foo = "bar"\n'), ('linenos', False), ('language', 'python'), ('style', 'friendly')]), OrderedDict([('id', 2), ('title', ''), ('code', 'print("hello, world")\n'), ('linenos', False), ('language', 'python'), ('style', 'friendly')]), OrderedDict([('id', 3), ('title', ''), ('code', 'print("hello, world")'), ('linenos', False), ('language', 'python'), ('style', 'friendly')])],status=status.HTTP_204_NO_CONTENT)
     else:
         data = [{'category': 'no found', 'tensors': 'invalid'}]
         return JsonResponse(data, safe=False)
